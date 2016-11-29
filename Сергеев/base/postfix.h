@@ -11,13 +11,11 @@ class TPostfix
 {
   string infix;
   string postfix;
-  string ToPostfix(string &Str);
   string *ArifmOperations;
   char* OperationsPriority;
 public:
-  TPostfix()
+  TPostfix(string Str)
   {
-	  string Str;
 	  OperationsPriority = new char[8];
 	  OperationsPriority[0] = 1;
 	  OperationsPriority[1] = 1;
@@ -36,15 +34,11 @@ public:
 	  ArifmOperations[5] = "cos";
 	  ArifmOperations[6] = "(";
 	  ArifmOperations[7] = ")";
-	  do
-	  {
-		  cin >> Str;
-	  }
-	  while (!ErrorChecking(Str));
 	  infix = Str;
-	  postfix = ToPostfix(Str);
+	  postfix = "Not Exist";
   }
-  bool ErrorChecking(string &Str);
+  bool ErrorChecking();
+  void ToPostfix();
   string GetInfix() { return infix; }
   string GetPostfix() { return postfix; }
   double Calculate(); // Ввод переменных, вычисление по постфиксной форме
