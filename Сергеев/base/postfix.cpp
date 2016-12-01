@@ -68,7 +68,7 @@ bool TPostfix::ErrorChecking()
 					cout << "После операции не может быть операции или закрывающей скобки на позиции " << i+1 << endl;
 					return 0;
 				}
-				if ((OperationIndexj != -1)||(Str[i+1]==0))
+				if (((OperationIndexj != -1)||(Str[i+1]==0))&&(OperationIndexj != 6))
 				{
 					cout << "Неверная запись выражения" << endl;
 					cout << "Отсутствует переменная после операции на позиции " << i + 1 << endl;
@@ -166,10 +166,20 @@ bool TPostfix::ErrorChecking()
 				}
 			}
 			i = i + p - 1;
+			if (IsOperation(Str, m = i + 1, ArifmOperations) == 6)
+			{
+				cout << "Неверная запись выражения" << endl;
+				cout << "После переменной не может быть открывающей скобки" << endl;
+				return 0;
+			}
 		}
 	}
 	if (amount != 0)
+	{
+		cout << "Неверная запись выражения" << endl;
+		cout << "Присутствуют лишние скобки" << endl;
 		return 0;
+	}
 	return 1;
 }
 int priority(string &Str, string* ArifmOperations,char* OperationsPriority)
@@ -249,6 +259,12 @@ void TPostfix::ToPostfix()
 }
 double TPostfix::Calculate()
 {
+	setlocale(LC_ALL, "Russian");
+	if (postfix == "Not Exist")
+	{
+		cout << "Постфиксная форма не создана" << endl;
+		throw("postfix_not_exist");
+	}
 	TStack<double> CalculatingStack;
 	double Var1,Var2;
 	int i, p, j, check;
@@ -360,6 +376,11 @@ double TPostfix::Calculate()
 			}
 			case 3:
 			{
+				if (Var1 == 0)
+				{
+					cout << "Ошибка: в процессе вычисления происходит деление на 0" << endl;
+					return 0;
+				}
 				Var1 = Var2/Var1;
 				CalculatingStack.Push(Var1);
 				break;
