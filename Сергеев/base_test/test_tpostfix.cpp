@@ -13,7 +13,7 @@ TEST(TPostfix, can_get_infix)
 	string expression = "a+b";
 	TPostfix Sample(expression);
 
-	ASSERT_NO_THROW(Sample.GetInfix());
+	EXPECT_EQ("a+b",Sample.GetInfix());
 }
 TEST(TPostfix, can_get_postfix)
 {
