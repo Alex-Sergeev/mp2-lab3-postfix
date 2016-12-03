@@ -19,9 +19,8 @@ TEST(TPostfix, can_get_postfix)
 {
 	string expression = "a+b";
 	TPostfix Sample(expression);
-	Sample.ToPostfix();
 
-	ASSERT_NO_THROW(Sample.GetPostfix());
+	EXPECT_EQ("Not Exist",Sample.GetPostfix());
 }
 
 TEST(TPostfix, created_postfix_is_right)
