@@ -68,7 +68,7 @@ bool TPostfix::ErrorChecking()
 					cout << "После операции не может быть операции или закрывающей скобки на позиции " << i+1 << endl;
 					return 0;
 				}
-				if (((OperationIndexj != -1)||(Str[i+1]==0))&&(OperationIndexj != 6))
+				if (((OperationIndexj < 4)&&(OperationIndexj>-1)&&(OperationIndexj!=6)||(Str[i+1]==0)))
 				{
 					cout << "Неверная запись выражения" << endl;
 					cout << "Отсутствует переменная после операции на позиции " << i + 1 << endl;
